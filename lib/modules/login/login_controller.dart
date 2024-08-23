@@ -22,7 +22,7 @@ class LoginController extends GetxController {
     if (response == null) return;
 
     await GetStorage().write('token', response['token']);
-    await GetStorage().write('isAdminLogin', isAdminLogin.value);
+    await GetStorage().write('isAdmin', isAdminLogin.value);
 
     Get
       ..back()
