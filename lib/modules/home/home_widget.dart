@@ -11,123 +11,154 @@ class HomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
+        autoRemove: false,
         init: HomeController(),
         builder: (controller) {
           return SingleChildScrollView(
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
                   child: ClipRRect(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(4.w)),
-                    child: Table(
-                      children: [
-                        TableRow(
-                          children: List.generate(
-                            controller.columns.length,
-                            (index) {
-                              String column = controller.columns[index];
+                    child: Obx(
+                      () => controller.data.isEmpty
+                          ? const SizedBox()
+                          : Table(
+                              children: [
+                                TableRow(
+                                  children: List.generate(
+                                    controller.columns1.length,
+                                    (index) {
+                                      String column = controller.columns1[index];
 
-                              return Container(
-                                padding: EdgeInsets.symmetric(vertical: 1.h),
-                                color: AppColors.gold1,
-                                child: index == 0
-                                    ? Padding(
-                                        padding: EdgeInsets.only(left: 3.w),
-                                        child: Text(
-                                          column,
-                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(vertical: 1.h),
+                                        decoration: BoxDecoration(
+                                          border: Border(
+                                            right: BorderSide(color: index == controller.columns1.length - 1 ? AppColors.gold1 : Colors.black),
+                                          ),
+                                          color: AppColors.gold1,
                                         ),
-                                      )
-                                    : Center(
-                                        child: Text(
-                                          column,
-                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                        child: Center(
+                                          child: Text(
+                                            column,
+                                            style: const TextStyle(fontWeight: FontWeight.bold),
+                                          ),
                                         ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                ...List.generate(
+                                  5,
+                                  (index) {
+                                    return TableRow(
+                                      children: List.generate(
+                                        controller.columns1.length,
+                                        (index1) {
+                                          String data = controller.data[index].values.elementAt(index1).toString();
+
+                                          return Container(
+                                            height: 8.h,
+                                            padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 1.w),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: AppColors.gold),
+                                              borderRadius: index == 4 && index1 == 0
+                                                  ? BorderRadius.only(bottomLeft: Radius.circular(4.w))
+                                                  : index == 4 && index1 == 4
+                                                      ? BorderRadius.only(bottomRight: Radius.circular(4.w))
+                                                      : null,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                data,
+                                                textAlign: TextAlign.center,
+                                                style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
-                              );
-                            },
-                          ),
-                        ),
-                        TableRow(
-                          children: List.generate(
-                            controller.columns.length,
-                            (index) {
-                              String column = controller.columns[index];
-
-                              return Container(
-                                padding: EdgeInsets.symmetric(vertical: 1.h),
-                                decoration: BoxDecoration(border: Border.all(color: AppColors.gold)),
-                                child: index == 0
-                                    ? Padding(
-                                        padding: EdgeInsets.only(left: 3.w),
-                                        child: Text("Gold", style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold)),
-                                      )
-                                    : Center(child: Text(column, style: AppStyles.whiteText)),
-                              );
-                            },
-                          ),
-                        )
-                      ],
+                                    );
+                                  },
+                                )
+                              ],
+                            ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
                   child: ClipRRect(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(4.w)),
-                    child: Table(
-                      children: [
-                        TableRow(
-                          children: List.generate(
-                            controller.columns.length,
-                            (index) {
-                              String column = controller.columns[index];
+                    child: Obx(
+                      () => controller.data.isEmpty
+                          ? const SizedBox()
+                          : Table(
+                              children: [
+                                TableRow(
+                                  children: List.generate(
+                                    controller.columns2.length,
+                                    (index) {
+                                      String column = controller.columns2[index];
 
-                              return Container(
-                                padding: EdgeInsets.symmetric(vertical: 1.h),
-                                color: AppColors.gold1,
-                                child: index == 0
-                                    ? Padding(
-                                        padding: EdgeInsets.only(left: 2.w),
-                                        child: Text(
-                                          column,
-                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(vertical: 1.h),
+                                        decoration: BoxDecoration(
+                                          border: Border(
+                                              right: BorderSide(color: index == controller.columns2.length - 1 ? AppColors.gold1 : Colors.black)),
+                                          color: AppColors.gold1,
                                         ),
-                                      )
-                                    : Center(
-                                        child: Text(
-                                          column,
-                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                        child: Center(
+                                          child: Text(
+                                            column,
+                                            style: const TextStyle(fontWeight: FontWeight.bold),
+                                          ),
                                         ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                ...List.generate(
+                                  4,
+                                  (index) {
+                                    return TableRow(
+                                      children: List.generate(
+                                        controller.columns2.length,
+                                        (index1) {
+                                          String data = controller.data[index + 5].values.elementAt(index1).toString();
+
+                                          return Container(
+                                            height: 8.h,
+                                            padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 1.w),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: AppColors.gold),
+                                              borderRadius: index == 3 && index1 == 0
+                                                  ? BorderRadius.only(bottomLeft: Radius.circular(4.w))
+                                                  : index == 3 && index1 == 2
+                                                      ? BorderRadius.only(bottomRight: Radius.circular(4.w))
+                                                      : null,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                data,
+                                                textAlign: TextAlign.center,
+                                                style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
-                              );
-                            },
-                          ),
-                        ),
-                        TableRow(
-                          children: List.generate(
-                            controller.columns.length,
-                            (index) {
-                              String column = controller.columns[index];
-
-                              return Container(
-                                padding: EdgeInsets.symmetric(vertical: 1.h),
-                                decoration: BoxDecoration(border: Border.all(color: AppColors.gold)),
-                                child: index == 0
-                                    ? Padding(
-                                        padding: EdgeInsets.only(left: 2.w),
-                                        child: Text("Gold", style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold)),
-                                      )
-                                    : Center(child: Text(column, style: AppStyles.whiteText)),
-                              );
-                            },
-                          ),
-                        )
-                      ],
+                                    );
+                                  },
+                                )
+                              ],
+                            ),
                     ),
                   ),
-                )
+                ),
+                SizedBox(height: 10.h),
               ],
             ),
           );
