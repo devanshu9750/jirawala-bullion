@@ -62,8 +62,9 @@ class UsersWidget extends StatelessWidget {
                     return ListTile(
                       visualDensity: VisualDensity.compact,
                       title: Text(user.name ?? '', style: AppStyles.goldText),
-                      subtitle: Text(user.mobileNo ?? '', style: AppStyles.whiteText),
-                      trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.delete, color: AppColors.gold)),
+                      subtitle: Text("M - ${user.mobileNo ?? ''}\nP - ${user.password ?? ''}", style: AppStyles.whiteText),
+                      trailing:
+                          IconButton(onPressed: () => controller.showDeleteUserDialogue(user), icon: const Icon(Icons.delete, color: AppColors.gold)),
                     );
                   },
                   separatorBuilder: (_, __) => const Divider(color: AppColors.gold),

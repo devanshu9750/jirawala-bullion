@@ -1,13 +1,44 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jirawala_bullion/core/api_endpoints.dart';
 import 'package:jirawala_bullion/core/api_request.dart';
+import 'package:jirawala_bullion/core/app_colors.dart';
+import 'package:jirawala_bullion/core/app_styles.dart';
 import 'package:jirawala_bullion/modules/users/user.dart';
 
 class UsersController extends GetxController {
   final searchUser = TextEditingController();
   final users = <User>[].obs;
   final searchedUsers = <User>[].obs;
+
+  Future<void> showDeleteUserDialogue(User user) async {
+    bool? response = await showDialog(
+      context: Get.context!,
+      builder: (_) {
+        return AlertDialog(
+          backgroundColor: AppColors.black,
+          title: const Text("Are you sure ?", style: AppStyles.whiteText),
+          actions: [
+            TextButton(onPressed: () => Get.back(result: false), child: const Text("Cancel", style: AppStyles.goldText)),
+            FilledButton(onPressed: () => Get.back(result: true), style: AppStyles.filledButtonGold, child: const Text("Delete")),
+          ],
+        );
+      },
+    );
+    if (response ?? false) deleteUser(user);
+  }
+
+  Future<bool> deleteUser(User user) async {
+    final Map<String, dynamic>? response = await ApiRequest.post(apiEndpoint: ApiEndpoints.deleteUser, params: {"end_user_id": user.id});
+    if (response == null) return false;
+    users
+      ..remove(user)
+      ..refresh();
+    searchedUsers
+      ..remove(user)
+      ..refresh();
+    return true;
+  }
 
   Future<List<User>?> getUsers() async {
     final Map<String, dynamic>? response = await ApiRequest.post(apiEndpoint: ApiEndpoints.usersList, params: {});
