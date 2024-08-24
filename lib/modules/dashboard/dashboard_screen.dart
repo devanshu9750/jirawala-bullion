@@ -6,6 +6,7 @@ import 'package:jirawala_bullion/core/app_extensions.dart';
 import 'package:jirawala_bullion/core/app_images.dart';
 import 'package:jirawala_bullion/core/app_styles.dart';
 import 'package:jirawala_bullion/modules/dashboard/dashboard_controller.dart';
+import 'package:jirawala_bullion/modules/home/home_widget.dart';
 import 'package:jirawala_bullion/modules/users/users_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -34,6 +35,7 @@ class DashboardScreen extends StatelessWidget {
                   Obx(
                     () => Expanded(
                       child: switch (controller.bottomNavIndex.value) {
+                        0 => const HomeWidget(),
                         1 => const UsersWidget(),
                         _ => Container(),
                       },
