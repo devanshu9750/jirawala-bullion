@@ -6,10 +6,13 @@ import 'package:jirawala_bullion/core/api_request.dart';
 import 'package:jirawala_bullion/modules/dashboard/widgets/add_user_dialogue.dart';
 import 'package:jirawala_bullion/modules/login/login_screen.dart';
 import 'package:jirawala_bullion/modules/users/users_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DashboardController extends GetxController {
   final isAdmin = GetStorage().read('isAdmin');
   final bottomNavIndex = 0.obs;
+
+  void contact() => launchUrl(Uri.parse("tel:+917383593262"));
 
   Future<void> showAddUserDialogue() async {
     Map<String, dynamic>? response = await showDialog(

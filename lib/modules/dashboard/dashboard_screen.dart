@@ -62,13 +62,13 @@ class DashboardScreen extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     behavior: HitTestBehavior.translucent,
-                    onTap: () => controller.isAdmin ? controller.bottomNavIndex.value = 1 : {},
+                    onTap: () => controller.isAdmin ? controller.bottomNavIndex.value = 1 : controller.contact(),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image.asset(controller.isAdmin ? AppImages.users : AppImages.home, height: 4.h),
+                        Image.asset(controller.isAdmin ? AppImages.users : AppImages.contact, height: 4.h),
                         SizedBox(height: 1.h),
-                        const Text("Users", style: AppStyles.whiteText),
+                        Text(controller.isAdmin ? "Users" : "Contact", style: AppStyles.whiteText),
                         SizedBox(height: 1.h),
                       ],
                     ),
