@@ -44,54 +44,57 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-            bottomNavigationBar: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () => controller.bottomNavIndex.value = 0,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(AppImages.home, height: 4.h),
-                        SizedBox(height: 1.h),
-                        const Text("Home", style: AppStyles.whiteText),
-                        SizedBox(height: 1.h),
-                      ],
+            bottomNavigationBar: Padding(
+              padding: EdgeInsets.only(top: 1.h),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () => controller.bottomNavIndex.value = 0,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(AppImages.home, height: 3.5.h),
+                          SizedBox(height: 1.h),
+                          const Text("Home", style: AppStyles.whiteText),
+                          SizedBox(height: 1.h),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () => controller.isAdmin ? controller.bottomNavIndex.value = 1 : controller.contact(),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(controller.isAdmin ? AppImages.users : AppImages.contact, height: 4.h),
-                        SizedBox(height: 1.h),
-                        Text(controller.isAdmin ? "Users" : "Contact", style: AppStyles.whiteText),
-                        SizedBox(height: 1.h),
-                      ],
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () => controller.isAdmin ? controller.bottomNavIndex.value = 1 : controller.contact(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(controller.isAdmin ? AppImages.users : AppImages.contact, height: 3.5.h),
+                          SizedBox(height: 1.h),
+                          Text(controller.isAdmin ? "Users" : "Contact", style: AppStyles.whiteText),
+                          SizedBox(height: 1.h),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: controller.logout,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(AppImages.logout, height: 4.h),
-                        SizedBox(height: 1.h),
-                        const Text("Logout", style: AppStyles.whiteText),
-                        SizedBox(height: 1.h),
-                      ],
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: controller.logout,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(AppImages.logout, height: 3.5.h),
+                          SizedBox(height: 1.h),
+                          const Text("Logout", style: AppStyles.whiteText),
+                          SizedBox(height: 1.h),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           );
         });

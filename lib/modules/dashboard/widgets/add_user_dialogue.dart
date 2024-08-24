@@ -31,7 +31,7 @@ class _AddUserDialogueState extends State<AddUserDialogue> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

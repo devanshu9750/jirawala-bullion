@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:jirawala_bullion/core/app_colors.dart';
 import 'package:jirawala_bullion/core/app_extensions.dart';
 import 'package:jirawala_bullion/core/app_styles.dart';
@@ -140,11 +141,31 @@ class HomeWidget extends StatelessWidget {
                                                       ? BorderRadius.only(bottomRight: Radius.circular(4.w))
                                                       : null,
                                             ),
-                                            child: Center(
-                                              child: Text(
-                                                data,
-                                                textAlign: TextAlign.center,
-                                                style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold),
+                                            child: GestureDetector(
+                                              behavior: HitTestBehavior.translucent,
+                                              onTap: GetStorage().read('isAdmin')
+                                                  ? () => controller.showUpdateValueDialogue(
+                                                        data: controller.data[index + 5],
+                                                        column: controller.data[index + 5].keys.elementAt(index1).toString(),
+                                                      )
+                                                  : null,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Flexible(
+                                                    child: Text(
+                                                      data,
+                                                      textAlign: TextAlign.center,
+                                                      style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  if (index1 != 0 && GetStorage().read('isAdmin'))
+                                                    Padding(
+                                                      padding: EdgeInsets.only(left: 2.w),
+                                                      child: Icon(Icons.edit, color: AppColors.gold, size: 2.5.h),
+                                                    )
+                                                ],
                                               ),
                                             ),
                                           );
