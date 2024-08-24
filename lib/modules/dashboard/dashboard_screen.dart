@@ -21,7 +21,7 @@ class DashboardScreen extends StatelessWidget {
             floatingActionButton: controller.isAdmin
                 ? FloatingActionButton(
                     backgroundColor: AppColors.gold1,
-                    onPressed: () {},
+                    onPressed: controller.showAddUserDialogue,
                     child: const Icon(CupertinoIcons.person_add),
                   )
                 : null,

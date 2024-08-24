@@ -56,6 +56,7 @@ class UsersWidget extends StatelessWidget {
             Expanded(
               child: Obx(
                 () => ListView.separated(
+                  itemCount: controller.searchedUsers.length,
                   itemBuilder: (context, index) {
                     User user = controller.searchedUsers[index];
 
@@ -63,12 +64,13 @@ class UsersWidget extends StatelessWidget {
                       visualDensity: VisualDensity.compact,
                       title: Text(user.name ?? '', style: AppStyles.goldText),
                       subtitle: Text("M - ${user.mobileNo ?? ''}\nP - ${user.password ?? ''}", style: AppStyles.whiteText),
-                      trailing:
-                          IconButton(onPressed: () => controller.showDeleteUserDialogue(user), icon: const Icon(Icons.delete, color: AppColors.gold)),
+                      trailing: IconButton(
+                        onPressed: () => controller.showDeleteUserDialogue(user),
+                        icon: const Icon(Icons.delete, color: AppColors.gold),
+                      ),
                     );
                   },
                   separatorBuilder: (_, __) => const Divider(color: AppColors.gold),
-                  itemCount: controller.searchedUsers.length,
                 ),
               ),
             )

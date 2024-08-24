@@ -38,7 +38,7 @@ class ApiRequest {
         return null;
       }
 
-      return response.data['contents'];
+      return response.data['contents'] ?? {'message': response.data['message']};
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
       return null;

@@ -5,4 +5,5 @@ class AppStyles {
   static const whiteText = TextStyle(color: Colors.white);
   static const goldText = TextStyle(color: AppColors.gold);
   static const filledButtonGold = ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppColors.gold));
+  static const filledButtonGoldDisabled = ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.grey));
 }

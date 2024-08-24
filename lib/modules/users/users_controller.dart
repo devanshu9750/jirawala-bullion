@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jirawala_bullion/core/api_endpoints.dart';
 import 'package:jirawala_bullion/core/api_request.dart';
-import 'package:jirawala_bullion/core/app_colors.dart';
+import 'package:jirawala_bullion/core/app_extensions.dart';
 import 'package:jirawala_bullion/core/app_styles.dart';
 import 'package:jirawala_bullion/modules/users/user.dart';
 
@@ -16,28 +16,25 @@ class UsersController extends GetxController {
       context: Get.context!,
       builder: (_) {
         return AlertDialog(
-          backgroundColor: AppColors.black,
+          backgroundColor: Colors.grey[850],
           title: const Text("Are you sure ?", style: AppStyles.whiteText),
           actions: [
             TextButton(onPressed: () => Get.back(result: false), child: const Text("Cancel", style: AppStyles.goldText)),
+            SizedBox(width: 2.w),
             FilledButton(onPressed: () => Get.back(result: true), style: AppStyles.filledButtonGold, child: const Text("Delete")),
           ],
         );
       },
     );
-    if (response ?? false) deleteUser(user);
+    if ((response ?? false) && await deleteUser(user)) {
+      users.remove(user);
+      searchedUsers.remove(user);
+    }
   }
 
   Future<bool> deleteUser(User user) async {
     final Map<String, dynamic>? response = await ApiRequest.post(apiEndpoint: ApiEndpoints.deleteUser, params: {"end_user_id": user.id});
-    if (response == null) return false;
-    users
-      ..remove(user)
-      ..refresh();
-    searchedUsers
-      ..remove(user)
-      ..refresh();
-    return true;
+    return response != null;
   }
 
   Future<List<User>?> getUsers() async {
@@ -46,6 +43,11 @@ class UsersController extends GetxController {
     if (response['users'] is List) return (response['users'] as List).map((e) => User.fromJson(e)).toList();
     return null;
   }
+
+  void refreshUsers() => getUsers().then((value) {
+        users.value = value ?? <User>[];
+        searchUser.clear();
+      });
 
   @override
   void onInit() {
