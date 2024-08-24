@@ -6,6 +6,7 @@ import 'package:jirawala_bullion/core/app_extensions.dart';
 import 'package:jirawala_bullion/core/app_images.dart';
 import 'package:jirawala_bullion/core/app_styles.dart';
 import 'package:jirawala_bullion/modules/dashboard/dashboard_controller.dart';
+import 'package:jirawala_bullion/modules/users/users_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -30,8 +31,14 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: 2.h),
                   Image.asset(AppImages.dashboardAppbar),
-                  SizedBox(height: 4.h),
-                  Expanded(child: Container()),
+                  Obx(
+                    () => Expanded(
+                      child: switch (controller.bottomNavIndex.value) {
+                        1 => const UsersWidget(),
+                        _ => Container(),
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -39,6 +46,7 @@ class DashboardScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
                     onTap: () => controller.bottomNavIndex.value = 0,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -53,7 +61,8 @@ class DashboardScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => controller.bottomNavIndex.value = 1,
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => controller.isAdmin ? controller.bottomNavIndex.value = 1 : {},
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -67,6 +76,7 @@ class DashboardScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
                     onTap: controller.logout,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
