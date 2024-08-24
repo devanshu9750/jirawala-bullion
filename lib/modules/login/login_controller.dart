@@ -24,8 +24,6 @@ class LoginController extends GetxController {
     await GetStorage().write('token', response['token']);
     await GetStorage().write('isAdmin', isAdminLogin.value);
 
-    Get
-      ..back()
-      ..toNamed(DashboardScreen.routeName);
+    Get.offAllNamed(DashboardScreen.routeName);
   }
 }

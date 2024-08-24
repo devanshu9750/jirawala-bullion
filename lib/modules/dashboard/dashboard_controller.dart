@@ -30,8 +30,7 @@ class DashboardController extends GetxController {
 
   Future<void> logout() async {
     await GetStorage().erase();
-    Get
-      ..back()
-      ..toNamed(LoginScreen.routeName);
+    await Get.deleteAll(force: true);
+    Get.offAllNamed(LoginScreen.routeName);
   }
 }
