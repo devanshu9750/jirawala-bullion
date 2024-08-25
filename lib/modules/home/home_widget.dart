@@ -26,6 +26,7 @@ class HomeWidget extends StatelessWidget {
                       () => controller.data.isEmpty
                           ? const SizedBox()
                           : Table(
+                              columnWidths: {0: FixedColumnWidth(25.w)},
                               children: [
                                 TableRow(
                                   children: List.generate(
@@ -61,7 +62,7 @@ class HomeWidget extends StatelessWidget {
                                           String data = controller.data[index].values.elementAt(index1).toString();
 
                                           return Container(
-                                            height: 8.h,
+                                            height: 9.h,
                                             padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 1.w),
                                             decoration: BoxDecoration(
                                               border: Border.all(color: AppColors.gold),
@@ -97,6 +98,11 @@ class HomeWidget extends StatelessWidget {
                       () => controller.data.isEmpty
                           ? const SizedBox()
                           : Table(
+                              columnWidths: {
+                                0: FlexColumnWidth(),
+                                1: FixedColumnWidth(GetStorage().read('isAdmin') ? 28.w : 25.w),
+                                2: FixedColumnWidth(GetStorage().read('isAdmin') ? 28.w : 25.w),
+                              },
                               children: [
                                 TableRow(
                                   children: List.generate(
@@ -131,7 +137,7 @@ class HomeWidget extends StatelessWidget {
                                           String data = controller.data[index + 5].values.elementAt(index1).toString();
 
                                           return Container(
-                                            height: 8.h,
+                                            height: 12.h,
                                             padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 1.w),
                                             decoration: BoxDecoration(
                                               border: Border.all(color: AppColors.gold),

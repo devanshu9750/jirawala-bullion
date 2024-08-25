@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
                 height: 100.h,
                 width: 100.w,
-                decoration: BoxDecoration(image: DecorationImage(image: AssetImage(AppImages.loginBG), fit: BoxFit.fill)),
+                decoration: BoxDecoration(image: DecorationImage(image: AssetImage(AppImages.loginBG), fit: BoxFit.cover)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -30,6 +30,7 @@ class LoginScreen extends StatelessWidget {
                       controller: controller.mobileNo,
                       style: const TextStyle(color: Colors.white, fontSize: 18),
                       cursorColor: AppColors.gold,
+                      keyboardType: TextInputType.phone,
                       decoration: const InputDecoration(
                         hintText: "Mobile No",
                         hintStyle: TextStyle(color: Colors.white),
