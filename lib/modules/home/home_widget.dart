@@ -170,7 +170,7 @@ class HomeWidget extends StatelessWidget {
                                                 children: [
                                                   Flexible(
                                                     child: Text(
-                                                      data,
+                                                      data == "0" || data == "0.0" ? '--' : data,
                                                       textAlign: TextAlign.center,
                                                       style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold, fontSize: 12),
                                                     ),
