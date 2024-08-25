@@ -44,6 +44,7 @@ class LoginScreen extends StatelessWidget {
                       obscureText: true,
                       style: const TextStyle(color: Colors.white, fontSize: 18),
                       cursorColor: AppColors.gold,
+                      keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         hintText: "Password",
                         hintStyle: TextStyle(color: Colors.white),

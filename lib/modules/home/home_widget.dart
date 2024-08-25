@@ -26,7 +26,7 @@ class HomeWidget extends StatelessWidget {
                       () => controller.data.isEmpty
                           ? const SizedBox()
                           : Table(
-                              columnWidths: {0: FixedColumnWidth(25.w)},
+                              columnWidths: {0: FixedColumnWidth(22.w)},
                               children: [
                                 TableRow(
                                   children: List.generate(
@@ -60,11 +60,20 @@ class HomeWidget extends StatelessWidget {
                                         controller.columns1.length,
                                         (index1) {
                                           String data = controller.data[index].values.elementAt(index1).toString();
+                                          bool changeBG = controller.prevData.isNotEmpty;
+                                          Color bgColor = Colors.transparent;
+
+                                          if (changeBG) {
+                                            String prevData = controller.prevData[index].values.elementAt(index1).toString();
+                                            changeBG = prevData.compareTo(data) != 0;
+                                            if (changeBG) bgColor = prevData.compareTo(data) < 0 ? Colors.green : Colors.red;
+                                          }
 
                                           return Container(
                                             height: 9.h,
                                             padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 1.w),
                                             decoration: BoxDecoration(
+                                              color: bgColor,
                                               border: Border.all(color: AppColors.gold),
                                               borderRadius: index == 4 && index1 == 0
                                                   ? BorderRadius.only(bottomLeft: Radius.circular(4.w))
@@ -76,7 +85,7 @@ class HomeWidget extends StatelessWidget {
                                               child: Text(
                                                 data,
                                                 textAlign: TextAlign.center,
-                                                style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold),
+                                                style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold, fontSize: 12),
                                               ),
                                             ),
                                           );
@@ -137,7 +146,7 @@ class HomeWidget extends StatelessWidget {
                                           String data = controller.data[index + 5].values.elementAt(index1).toString();
 
                                           return Container(
-                                            height: 12.h,
+                                            height: 11.h,
                                             padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 1.w),
                                             decoration: BoxDecoration(
                                               border: Border.all(color: AppColors.gold),
@@ -163,7 +172,7 @@ class HomeWidget extends StatelessWidget {
                                                     child: Text(
                                                       data,
                                                       textAlign: TextAlign.center,
-                                                      style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold),
+                                                      style: AppStyles.whiteText.copyWith(fontWeight: FontWeight.bold, fontSize: 12),
                                                     ),
                                                   ),
                                                   if (index1 != 0 && GetStorage().read('isAdmin'))

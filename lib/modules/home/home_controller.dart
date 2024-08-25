@@ -56,7 +56,7 @@ class HomeController extends GetxController {
     await channel.ready;
 
     channel.stream.listen((message) {
-      prevData.value = data;
+      prevData.value = List.from(data);
       data.value = jsonDecode(message.toString().replaceAll('=>', ":"));
     });
   }
